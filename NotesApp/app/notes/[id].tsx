@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
+import { items } from "../../assets/data";
 
 export default function NoteDetails() {
   const { id } = useLocalSearchParams();
   const navigation = useNavigation();
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({ title: "Note Details" });
   }, [navigation]);
 
+  const noteId = Array.isArray(id) ? id[0] : id;
+ 
+  const index = parseInt(noteId ?? "0", 10) - 1;
+
+  if (!items[index]) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.noteTitle}>Note not found</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.noteTitle}>Note {id}</Text>
-      <Text style={styles.noteBody}>This is the detail page for note {id}.</Text>
+      <Text style={styles.noteTitle}>{items[index].title}</Text>
+      <Text style={styles.noteBody}>{items[index].body}</Text>
     </View>
   );
 }
@@ -35,5 +48,6 @@ const styles = StyleSheet.create({
   noteBody: {
     fontSize: 16,
     color: "#ccc",
+    textAlign: "center",
   },
 });

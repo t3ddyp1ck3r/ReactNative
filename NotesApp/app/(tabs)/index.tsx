@@ -1,43 +1,14 @@
 import React, { useLayoutEffect } from "react";
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter, useNavigation } from "expo-router";
-
-const items = [
-  {
-    id: "1",
-    title: "Introduction to JavaScript",
-    body: "JavaScript is a versatile programming language used for web development.",
-  },
-  {
-    id: "2",
-    title: "DOM Manipulation",
-    body: "The Document Object Model (DOM) allows interaction with HTML elements using JavaScript.",
-  },
-  {
-    id: "3",
-    title: "Async/Await",
-    body: "Async/Await simplifies handling asynchronous operations in JavaScript.",
-  },
-  {
-    id: "4",
-    title: "Closures",
-    body: "Closures allow functions to retain access to variables from their parent scope even after the parent function has executed.",
-  },
-  {
-    id: "5",
-    title: "JavaScript Modules",
-    body: "JavaScript modules allow code organization and reuse across multiple files.",
-  },
-];
+import { items } from "../../assets/data"; 
 
 export default function HomeScreen() {
   const router = useRouter();
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
-    navigation.setOptions({
-      title: "Home",
-    });
+    navigation.setOptions({ title: "Home" });
   }, [navigation]);
 
   return (
